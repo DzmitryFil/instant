@@ -17,17 +17,5 @@ jobs:
           name: build
           command: cargo build --verbose;
       - run:
-          name: build --features stdweb
-          command: cargo web build --verbose --target wasm32-unknown-unknown --features "stdweb";
-      - run:
-          name: build --features wasm-bindgen
-          command: cargo build --verbose --target wasm32-unknown-unknown --features "wasm-bindgen";
-      - run:
-          name: build --features now
-          command: cargo build --verbose --features now;
-      - run:
-          name: build --features now stdweb
-          command: cargo web build --verbose --target wasm32-unknown-unknown --features "now stdweb";
-      - run:
-          name: build --features now wasm-bindgen
-          command: cargo build --verbose --target wasm32-unknown-unknown --features "now wasm-bindgen";
+          name: build web
+          command: cargo web build --verbose --target wasm32-unknown-unknown;
