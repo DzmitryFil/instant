@@ -1,5 +1,6 @@
 use std::ops::{Add, AddAssign, Sub, SubAssign};
 use std::time::Duration;
+use wasm_bindgen::prelude::*;
 
 #[derive(Copy, Clone, Debug, PartialEq, PartialOrd)]
 pub struct Instant(f64);
@@ -83,21 +84,15 @@ fn duration_to_f64(d: Duration) -> f64 {
     d.as_secs() as f64 * 1.0e3 + f64::from(d.subsec_nanos()) * 1.0e-6
 }
 
-#[cfg(feature = "stdweb")]
-#[allow(unused_results)] // Needed because the js macro triggers it.
-pub fn now() -> f64 {
-    use stdweb::unstable::TryInto;
+#[wasm_bindgen]
+extern "C" {
+    type performance;
 
-    // https://developer.mozilla.org/en-US/docs/Web/API/Performance/now
-    let v = js! { return performance.now(); };
-    v.try_into().unwrap()
+    #[wasm_bindgen(static_method_of = performance)]
+    fn now() -> f64;
 }
 
-#[cfg(feature = "wasm-bindgen")]
+#[inline]
 pub fn now() -> f64 {
-    web_sys::window()
-        .expect("should have a window in this context")
-        .performance()
-        .expect("performance should be available")
-        .now()
-}
+    performance::now()
+} 
