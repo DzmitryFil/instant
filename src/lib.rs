@@ -1,42 +1,16 @@
-#[cfg(all(any(target_arch = "wasm32", target_arch = "asmjs"), feature = "stdweb"))]
-#[macro_use]
-extern crate stdweb;
 
-#[cfg(any(
-    not(any(target_arch = "wasm32", target_arch = "asmjs")),
-    not(any(feature = "stdweb", feature = "wasm-bindgen"))
-))]
-pub use crate::native::Instant;
 
-#[cfg(all(
-    any(target_arch = "wasm32", target_arch = "asmjs"),
-    any(feature = "stdweb", feature = "wasm-bindgen")
-))]
-pub use crate::wasm::Instant;
+cfg_if::cfg_if! {
+    if #[cfg(target_arch= "wasm32")] {
 
-#[cfg(any(
-    not(any(target_arch = "wasm32", target_arch = "asmjs")),
-    not(any(feature = "stdweb", feature = "wasm-bindgen"))
-))]
-#[cfg(feature = "now")]
-pub use crate::native::now;
+        mod wasm;
+        pub use wasm::*;
 
-#[cfg(all(
-    any(target_arch = "wasm32", target_arch = "asmjs"),
-    any(feature = "stdweb", feature = "wasm-bindgen")
-))]
-#[cfg(feature = "now")]
-pub use crate::wasm::now;
+    } else {
 
-pub use std::time::Duration;
+        mod native;
+        pub use native::*;
+        
 
-#[cfg(any(
-    not(any(target_arch = "wasm32", target_arch = "asmjs")),
-    not(any(feature = "stdweb", feature = "wasm-bindgen"))
-))]
-mod native;
-#[cfg(all(
-    any(target_arch = "wasm32", target_arch = "asmjs"),
-    any(feature = "stdweb", feature = "wasm-bindgen")
-))]
-mod wasm;
+    }
+}
