@@ -95,4 +95,4 @@ extern "C" {
 #[inline]
 pub fn now() -> f64 {
     performance::now()
-} 
+}

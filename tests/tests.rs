@@ -1,6 +1,6 @@
 extern crate wasm_bindgen_test;
 
-use instant::{Instant, now};
+use instant::{now, Instant};
 use std::time::Duration;
 use wasm_bindgen_test::*;
 

@@ -1,5 +1,3 @@
-
-
 cfg_if::cfg_if! {
     if #[cfg(target_arch= "wasm32")] {
 
@@ -10,7 +8,7 @@ cfg_if::cfg_if! {
 
         mod native;
         pub use native::*;
-        
+
 
     }
 }
