@@ -1,8 +1,8 @@
 extern crate wasm_bindgen_test;
+use wasm_bindgen_test::*;
+use std::time::Duration;
 
 use instant::{now, Instant};
-use std::time::Duration;
-use wasm_bindgen_test::*;
 
 wasm_bindgen_test_configure!(run_in_browser);
 // run these tests using: wasm-pack test --firefox --headless
