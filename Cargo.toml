@@ -19,7 +19,7 @@ cfg-if = "0.1"
 time = { version = "0.1" }
 
 [target.'cfg(target_arch = "wasm32")'.dependencies]
-wasm-bindgen = "0.2.64"
+wasm-bindgen = "0.2.67"
 
 [dev-dependencies]
 wasm-bindgen-test = "0.3.13"
